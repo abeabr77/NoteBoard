@@ -1,8 +1,12 @@
 const express = require("express")
 const cors = require("cors");
 const noteRoutes = require("./routes/noteRoutes");
+const connectDB = requre("./config/db")
+const dotenv = requrie("dotenv")
+dotenv.config();
 
 const app = express();
+connectDB(); // Database
 
 // Middleware
 app.use(cors());

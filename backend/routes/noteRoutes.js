@@ -1,17 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const Note = requrie("../models/noteModel")
 
 // @desc  Get all notes
 // @route GET /api/notes
-router.get("/", (req, res) => {
-    res.json({ message: "Get all notes"});
+router.get("/", async (req, res) => {
+    const notes = await Note.find();
+    res.json(notes);
 });
 
 // @desc Create note
 // @route POST /api/notes
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const { title, content } = req.body;
-    res.json({ message: "Note created", note: { title, content} });
+    
+    const note = await Note.create({ title, content});
+    res.status(201).json(note)
+
 })
 
 module.exports = router;
